@@ -29,10 +29,12 @@ public class Nace {
 	@Lob
 	private String thisItemIncludes;
 	@Column(name = "This_Item_Also_Includes")
+	@Lob
 	private String thisItemAlsoIncludes;
 	@Column(name = "Rulings")
 	private String rulings;
 	@Column(name = "This_Item_Excludes")
+	@Lob
 	private String thisItemExcludes;
 	@Column(name = "Reference")
 	private String reference;
@@ -67,6 +69,21 @@ public class Nace {
 
 	public int getOrder() {
 		return order;
+	}
+
+	public Nace(int order, int level, String code, String parent, String description, String thisItemIncludes,
+			String thisItemAlsoIncludes, String rulings, String thisItemExcludes, String reference) {
+		super();
+		this.order = order;
+		this.level = level;
+		this.code = code;
+		this.parent = parent;
+		this.description = description;
+		this.thisItemIncludes = thisItemIncludes;
+		this.thisItemAlsoIncludes = thisItemAlsoIncludes;
+		this.rulings = rulings;
+		this.thisItemExcludes = thisItemExcludes;
+		this.reference = reference;
 	}
 
 	public void setOrder(int order) {

@@ -1,5 +1,9 @@
 package com.java.assessment.controllerTest;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,6 +25,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.assessment.controller.NaceController;
 import com.java.assessment.entity.Nace;
+import com.java.assessment.exceptionHandling.DetailsNotFound;
 import com.java.assessment.service.NaceService;
 
 @ExtendWith(SpringExtension.class)
@@ -71,7 +76,9 @@ public class NaceControllerTest {
 
 		when(naceService.findNaceByOrderId(398431)).thenReturn(Optional.of(nace));
 		this.mvc.perform(MockMvcRequestBuilders.get("/nace/naceDetails/398432"))
-				.andExpect(MockMvcResultMatchers.status().isNotFound());
+				.andExpect(MockMvcResultMatchers.status().isNotFound())
+				.andExpect(result -> assertTrue(result.getResolvedException() instanceof DetailsNotFound))
+				.andExpect(result -> assertEquals("Details not found", result.getResolvedException().getMessage()));
 
 	}
 

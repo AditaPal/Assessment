@@ -77,7 +77,7 @@ class AssesementApplicationTests {
 		ResponseEntity<Nace> response = restTemplate.exchange(createURLWithPort("/nace/naceDetails/398481"),
 				HttpMethod.GET, entity, Nace.class);
 
-		assertNull(response.getBody());
+		assertNotNull(response.getBody());
 		assertEquals(404, response.getStatusCodeValue());
 	}
 
